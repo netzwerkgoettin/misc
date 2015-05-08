@@ -1,0 +1,6 @@
+## /etc/default/mysql-proxy / 20150508
+## Marianne Spiller <github@spiller.me>
+## mysql-cluster-gpl-7.4.6-linux-glibc2.5-x86_64
+
+iENABLED="true"
+OPTIONS="--defaults-file=/etc/mysql-proxy.conf --plugins=proxy"
