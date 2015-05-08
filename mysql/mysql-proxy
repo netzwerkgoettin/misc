@@ -2,5 +2,5 @@
 ## Marianne Spiller <github@spiller.me>
 ## mysql-cluster-gpl-7.4.6-linux-glibc2.5-x86_64
 
-iENABLED="true"
+ENABLED="true"
 OPTIONS="--defaults-file=/etc/mysql-proxy.conf --plugins=proxy"
