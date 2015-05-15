@@ -1,0 +1,23 @@
+## /etc/my.cnf for SECONDARY cluster / 20150515
+## Marianne Spiller <github@spiller.me>
+## mysql-cluster-gpl-7.4.6-linux-glibc2.5-x86_64
+
+[mysqld]
+##	bind-address            = 10.0.2.12
+bind-address = 0.0.0.0
+ndbcluster
+datadir=/var/lib/mysql-cluster/data
+default-storage-engine=NDBCLUSTER
+server-id=9
+log-bin=blue-bin.log
+ndb-log-transaction-id=1
+binlog-format=ROW
+ndb-log-update-as-write=0
+ndb-log-apply-status=1
+#----------------------------------------------------------------------
+# Angabe der management nodes
+ndb-connectstring=management3,management4
+[mysql_cluster]
+#----------------------------------------------------------------------
+# Angabe der management nodes
+ndb-connectstring=management3,management4
