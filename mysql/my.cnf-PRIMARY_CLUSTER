@@ -1,0 +1,18 @@
+## /etc/my.cnf for PRIMARY cluster / 20150515
+## Marianne Spiller <github@spiller.me>
+## mysql-cluster-gpl-7.4.6-linux-glibc2.5-x86_64
+
+[mysqld]
+##	bind-address = 10.0.2.10
+bind-address = 0.0.0.0
+ndbcluster
+datadir=/var/lib/mysql-cluster/data
+default-storage-engine=NDBCLUSTER
+server-id=8
+log-bin=green-bin.log
+ndb-log-transaction-id=1
+binlog-format=ROW
+ndb-log-update-as-write=0
+ndb-connectstring=management1,management2
+[mysql_cluster]
+ndb-connectstring=management1,management2
