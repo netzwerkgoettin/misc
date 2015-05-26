@@ -1,0 +1,15 @@
+## mutt/.muttrc / 20150526
+## Marianne Spiller <github@spiller.me>
+## Mutt 1.5.23 on OSX, patch-1.5.20.bk.trash_folder-purge_message.1, patch-1.5.23.sidebar.20140412.txt
+
+#----------------------------------------------------------------------
+# HEADERS
+#
+ignore *
+unignore from: date subject to cc
+unignore x-mailing-list: posted-to:
+unignore x-mailer
+unignore X-DSPAM-Result:
+unignore user-agent:
+unignore x-editor:
+hdr_order Date X-DSPAM-Result From To Cc Subject X-Mailer User-Agent X-Editor
