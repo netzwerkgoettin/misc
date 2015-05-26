@@ -1,0 +1,51 @@
+## mutt/options / 20150526
+## Marianne Spiller <github@spiller.me>
+## Mutt 1.5.23 on OSX, patch-1.5.20.bk.trash_folder-purge_message.1, patch-1.5.23.sidebar.20140412.txt
+
+## Header manuell setzen - manchmal ist das nuetzlich
+## set edit_headers="yes"
+
+## This adds the -f option when calling $sendmail to deliver the mail, forcing it to use the same address for the envelope as for the From: header field.
+set use_envelope_from="yes"
+
+## This variable controls the format of the one-line message ``status'' displayed before each message in either the internal or an external pager. The valid sequences are listed in the `` $index_format'' section.
+set pager_format="(P1) %S [%C/%T] %n (%l) %s"
+
+set pager_index_lines="12"
+
+## Unterdruecken der Meldung "Press any key to continue..."
+set wait_key="no"
+
+## controls whether mutt will accept certificates whose host names do not match the host name in the folder URL.
+set ssl_verify_host="no"
+
+## Beim Antworten die Nachricht zitieren? Ja. 
+set include="yes"
+
+## Fragen beim Bewegen von Nachrichten? Aber nein. Wie nervig.
+set confirmappend="no"
+
+## Hiermit erspare ich mir die Nachfragen bzgl. Subject & Co. beim Antworten
+set fast_reply="yes"
+
+## Zur Loeschung vorgemerkte Nachrichten werden ohne weitere Nachfrage geloescht
+set delete="yes"
+
+## Umgebrochene Zeilen mit einem + will ich nicht
+set markers="no"
+
+## Ich sortiere anhand meines Scoring und der Threads
+set sort="threads"
+set sort_aux="score"
+
+## Anpassung der Nachrichtenuebersicht an eigene Belange
+set index_format="%4C %2N %Z %{%b %d} %-40.40F %s"
+
+## Wie oft wird auf neue Mails hin ueberprueft? Angabe in Sekunden.
+set mail_check="60"
+
+## Mein Editor ist vim,
+## - die Zeilen nicht numeriert,
+## - Spellcheck für englisch und deutsch,
+## - Zeilenlaenge 72 Zeichen
+set editor="vim \"+set nonumber\" \"+set spell spelllang=de,en\" \"+set tw=72\""
