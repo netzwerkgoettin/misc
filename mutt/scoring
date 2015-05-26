@@ -1,0 +1,63 @@
+## mutt/scoring / 20150526
+## Marianne Spiller <github@spiller.me>
+## Mutt 1.5.23 on OSX, patch-1.5.20.bk.trash_folder-purge_message.1, patch-1.5.23.sidebar.20140412.txt
+
+#----------------------------------------------------------------------
+# SCORING
+#
+unscore *
+
+## Alle, die konkret an mich gerichtet sind, kriegen schonmal score 10
+score '~p' 10
+
+## Alle, die neu sind, haben per Definition Score 5 
+score '~N' 5
+
+## Alte ungelesene Nachrichten haben Score 4
+score '~O' 4
+
+## Geflaggte sollten immer ganz oben stehen
+score '~F' =60
+
+## Pruefe gegen Absender
+## Familie
+score '~f vorname\.nachname@domain\.com' 40
+
+## Freunde
+score '~f vorname\.nachname@domain\.com' 30
+
+## Leidlich wichtiges Zeug
+score '~f absender@domain\.com' 20
+
+## Rechnungen und Kram von Haendlern
+score '~f absender@haendler\.de' =10
+score '~t haendler@spiller\.me' =10
+score '~f @haendler\.com' =10
+score '^~f absender\.org' =10
+
+## Mailing-Listen 
+##      score '~l' 3
+
+## Zeug, das idR niemand braucht...
+score '~f newsletter@spam\.com' =0
+score '^~f spam\.de' =0
+score '~s [SPAM]' =0
+##      score '~h "X-DSPAM-Result: Spam"' =0
+
+## Pruefe auf GPG-signierte Nachrichten
+## score "~g" 1
+##
+## Pruefe auf GPG-verschluesselte Nachrichten
+## score "~G" 1
+##
+## Nachrichten *von* mir
+## score "~P" 1
+##
+## Nachrichten, auf die ich (per mutt) bereits geantwortet habe
+## score ~~Q" 1
+##
+## Gelesene Nachrichten
+## score "~R" 1
+##
+## Nachrichten mit weniger als 80.000 Bytes
+## score "~z 0-80000" 1
