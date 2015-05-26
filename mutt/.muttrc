@@ -1,0 +1,17 @@
+## mutt/.muttrc / 20150526
+## Marianne Spiller <github@spiller.me>
+## Mutt 1.5.23 on OSX, patch-1.5.20.bk.trash_folder-purge_message.1, patch-1.5.23.sidebar.20140412.txt
+
+source ~/Google\ Drive/mutt/general
+source ~/Google\ Drive/mutt/options
+source ~/Google\ Drive/mutt/sidebar
+source ~/Google\ Drive/mutt/files
+source ~/Google\ Drive/mutt/headers
+source ~/Google\ Drive/mutt/macros
+source ~/Google\ Drive/mutt/scoring
+source ~/Google\ Drive/mutt/colors
+#----------------------------------------------------------------------
+# SMTP setup
+#
+set smtp_url="smtp://USERNAME@MAILHOST:PORT/"
+set smtp_pass="MEIN_STENG_GEHEIMES_PASSWORT"
