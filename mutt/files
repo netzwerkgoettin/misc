@@ -1,0 +1,18 @@
+## mutt/.muttrc / 20150526
+## Marianne Spiller <github@spiller.me>
+## Mutt 1.5.23 on OSX, patch-1.5.20.bk.trash_folder-purge_message.1, patch-1.5.23.sidebar.20140412.txt
+
+#----------------------------------------------------------------------
+# ALIASES
+#
+set alias_file="~/Google\ Drive/mutt/aliases"
+set sort_alias="alias"
+set reverse_alias="yes"
+source $alias_file
+
+#----------------------------------------------------------------------
+# FILES
+#
+set header_cache="~/Google\ Drive/mutt/cache/headers"
+set message_cachedir="~/Google\ Drive/mutt/cache/bodies"
+set certificate_file="~/Google\ Drive/mutt/cert"
