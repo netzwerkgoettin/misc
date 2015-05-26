@@ -1,0 +1,8 @@
+## mutt/.mailcap / 20150526
+## Marianne Spiller <github@spiller.me>
+## Mutt 1.5.23 on OSX, patch-1.5.20.bk.trash_folder-purge_message.1, patch-1.5.23.sidebar.20140412.txt
+
+text/html; open -a "/Applications/Google\ Chrome.app" %s; needsterminal
+application/pdf; open -a /Applications/Preview.app %s; needsterminal
+image/jpeg; open -a /Applications/Preview.app %s; needsterminal
+image/png; open -a /Applications/Preview.app %s; needsterminal
