@@ -1,0 +1,21 @@
+## mutt/sidebar / 20150526
+## Marianne Spiller <github@spiller.me>
+## Mutt 1.5.23 on OSX, patch-1.5.20.bk.trash_folder-purge_message.1, patch-1.5.23.sidebar.20140412.txt
+
+#----------------------------------------------------------------------
+# SIDEBAR CONFIG
+#
+set sidebar_width=32
+set sidebar_visible=yes
+set sidebar_delim=' '
+set sidebar_sort=yes
+set sidebar_shortpath=yes
+color sidebar_new brightcyan default
+macro index B ':toggle sidebar_visible^M'
+macro pager B ':toggle sidebar_visible^M'
+bind index \CP sidebar-prev
+bind index \CN sidebar-next
+bind index \CL sidebar-open
+bind pager \CP sidebar-prev
+bind pager \CN sidebar-next
+bind pager \CL sidebar-open
