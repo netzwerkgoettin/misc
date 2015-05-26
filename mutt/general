@@ -1,0 +1,35 @@
+## mutt/general / 20150526
+## Marianne Spiller <github@spiller.me>
+## Mutt 1.5.23 on OSX, patch-1.5.20.bk.trash_folder-purge_message.1, patch-1.5.23.sidebar.20140412.txt
+
+#----------------------------------------------------------------------
+# General config
+#
+## Mein richtiger Name
+set realname="Marianne Spiller"
+
+## Mein Absender
+set from="\"Marianne Spiller\" <marianne@spiller.me>"
+
+## envelope_from_address
+set envelope_from_address="marianne@spiller.me"
+
+## Meine Signatur
+set signature="~/Google\ Drive/mutt/signature"
+
+## alternative Adressen 
+alternates "spillerm@localwurst.de|\
+@urban-exploring.eu"
+
+#----------------------------------------------------------------------
+# Folder setup
+# Die Archive liegen auf meiner lokalen Platte, nicht auf dem IMAP
+#
+set folder="~/.mail/spillerme"
+set spoolfile="~/.mail/spillerme/INBOX"
+set record="~/.mail/spillerme/INBOX.Sent Messages"
+set postponed="~/.mail/spillerme/INBOX.Drafts"
+set mbox_type="Maildir"
+set mbox="~/.mail/spillerme/Archives/[2002-2015]"
+save-hook . "~/.mail/spillerme/Archives/%[%Y]"
+mailboxes =INBOX =Archives/`date +%Y` =Archives/2014 =Archives/2013 =Archives/2012 =Archives/2011 =Archives/2010 =Archives/2009 =Archives/2008 =Archives/2007 =Archives/2006 =Archives/2005 =Archives/2002 =Archives/2003 =Archives/2004 /Users/spillerm/.mail/GMX/GMX /Users/spillerm/.mail/Gmail/GMail
