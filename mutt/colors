@@ -1,0 +1,53 @@
+## mutt/colors / 20150526
+## Marianne Spiller <github@spiller.me>
+## Mutt 1.5.23 on OSX, patch-1.5.20.bk.trash_folder-purge_message.1, patch-1.5.23.sidebar.20140412.txt
+
+#----------------------------------------------------------------------
+# Farben - ganz allgemein
+#
+color	attachment	brightmagenta	default
+color	error		brightred	default
+color	hdrdefault	default		default
+color	indicator	default		blue
+color	markers		brightcyan	default
+color	message		brightcyan	default
+color	normal		default		default
+color	quoted		brightblue	default
+color	search		default		green
+color	signature	green		default
+color	status		black		blue 
+color	tilde		blue		default
+color	tree		blue		default
+
+#----------------------------------------------------------------------
+# Farben - bezogen auf das Scoring
+#
+## Geflaggt: 60, Score > 50: brightblue
+color	index		brightblue	default		'~n 51-'
+
+## Familie: 40, Score 31 bis 50: magenta
+color	index		magenta		default		'~n 31-50'
+
+## Freunde: 30, Score 21 bis 30: blue
+color	index		blue		default		'~n 21-30'
+
+## Einigermassen wichtiges Zeug: 20, Score 11 bis 20: cyan
+color	index		cyan		default		'~n 11-20'
+
+## Rechnungen & Co. haben fest Score 10: green
+color	index		green		default		'~n 10'
+
+## Alles von 1 bis 9 ist potentiell unwichtig: weiss
+color	index		white		default		'~n 1-9'
+
+## Spam und Bloedsinn hat score 0: brightblack
+color	index		brightblack	default		'~n 0'
+
+## Nachrichten aelter als 14 Tage werden weiss auf rotem Hintergrund
+##color	index		white		red		'~d>14d'
+
+## Geloeschte Nachrichten werden black auf default Hintergrund
+color	index		black		default		'~D'
+
+## Geflaggte Nachrichten werden rot auf default Hintergrund
+##color	index		red		default		'~F'
