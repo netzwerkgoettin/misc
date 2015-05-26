@@ -1,0 +1,9 @@
+! MessageViaProwl.ccu2 / 20150310
+! Marianne Spiller <github@spiller.me>
+! Requires: CCU2
+!
+string stdout;
+string stderr;
+string text;
+text = " hier die zu sendende Nachricht!";
+system.Exec("wget -q -O /dev/null 'http://prowl.weks.net/publicapi/add?apikey=$APIKEY&application=OpenHAB&priority=1\&description=Absender" # text # "' ", &stdout, &stderr);
