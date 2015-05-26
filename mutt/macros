@@ -1,0 +1,24 @@
+## mutt/macros / 20150526
+## Marianne Spiller <github@spiller.me>
+## Mutt 1.5.23 on OSX, patch-1.5.20.bk.trash_folder-purge_message.1, patch-1.5.23.sidebar.20140412.txt
+
+#----------------------------------------------------------------------
+# MACROS
+#
+bind editor <space> noop
+macro index gi "<change-folder>=INBOX<enter>" "Go to INBOX"
+macro index gs "<change-folder>=INBOX.Sent Messages<enter>" "Go to sent messages"
+macro index gd "<change-folder>=INBOX.Drafts<enter>" "Go to drafts"
+macro index q "<shell-escape>offlineimap -a spillerme<enter><quit>"
+macro index \cb |urlview\n
+macro pager \cb |urlview\n
+macro index <F11> \
+<tag-pattern>"~n -9"<enter><tag-prefix><save-message>"=INBOX/Trash"<enter>$ \
+'In die Muelltonne schieben...'
+macro index <ESC>r ":source ~/.muttrc-private\n" "Konfigurationsdatei neu einlesen"
+macro pager <ESC>i "<save-message>=INBOX<enter>\n" "In die INBOX verschieben"
+macro index <ESC>l "<tag-pattern>~n 0<enter><tag-prefix-cond><delete-message><sync-mailbox>" "Mails mit Score 0 löschen"
+
+# Sync email
+macro index O "<shell-escape>offlineimap -a spillerme,GMX,Gmail -qf INBOX<enter>" "run offlineimap to sync all mail"
+macro index o "<shell-escape>offlineimap -a spillerme -qf INBOX<enter>" "run offlineimap to sync inbox"
