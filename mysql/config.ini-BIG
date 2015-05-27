@@ -1,0 +1,93 @@
+## config.ini / 20150527
+## Marianne Spiller <github@localwurst.de>
+## mysql-cluster-gpl-7.4.6-linux-glibc2.5-x86_64
+
+[NDBD DEFAULT]
+
+LockPagesInMainMemory=1
+ODirect=1
+NoOfFragmentLogFiles=300
+MaxNoOfConcurrentOperations=100000
+SchedulerSpinTimer=400
+SchedulerExecutionTimer=100
+RealTimeScheduler=1
+TimeBetweenGlobalCheckpoints=1000
+TimeBetweenEpochs=200
+RedoBuffer=32M
+
+CompressedLCP=1
+CompressedBackup=1
+
+NoOfReplicas=2
+DataMemory=2048M
+MaxNoOfTriggers=4096
+MaxNoOfAttributes=32768
+MaxNoOfOrderedIndexes=512
+IndexMemory=384M
+MaxNoOfUniqueHashIndexes=64
+MaxNoOfTables=1024
+
+[MYSQLD DEFAULT]
+
+[NDB_MGMD DEFAULT]
+DataDir=/var/lib/mysql-cluster
+
+#----------------------------------------------------------------------
+# TCP-Parameter
+#
+[TCP DEFAULT]
+SendBufferMemory=2M
+ReceiveBufferMemory=2M
+
+#----------------------------------------------------------------------
+# Die management nodes
+#
+[NDB_MGMD]
+NodeId=1
+Hostname=management1
+
+[NDB_MGMD]
+NodeId=2
+HostName=management2
+
+#----------------------------------------------------------------------
+# Die data nodes
+#
+[NDBD]
+HostName=datanode1
+NodeId=10
+DataDir=/var/lib/mysql-cluster
+LockExecuteThreadToCPU=1
+LockMaintThreadsToCPU=0
+
+[NDBD]
+HostName=datanode2
+NodeId=11
+DataDir=/var/lib/mysql-cluster
+LockExecuteThreadToCPU=1
+LockMaintThreadsToCPU=0
+
+[NDBD]
+HostName=datanode1
+NodeId=12
+DataDir=/var/lib/mysql-cluster
+LockExecuteThreadToCPU=1
+LockMaintThreadsToCPU=0
+
+[NDBD]
+HostName=datanode2
+NodeId=13
+DataDir=/var/lib/mysql-cluster
+LockExecuteThreadToCPU=1
+LockMaintThreadsToCPU=0
+
+#----------------------------------------------------------------------
+# Und jetzt ein MYSQLD für jeden sql node
+#
+[MYSQLD]
+HostName=datanode1
+NodeId=20
+
+[MYSQLD]
+HostName=datanode2
+NodeId=21
