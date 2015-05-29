@@ -1,0 +1,38 @@
+## nrpe.conf for data nodes / 20150529
+## Marianne Spiller <github@spiller.me>
+## Used with icinga_1.10.3-1
+
+log_facility=daemon
+pid_file=/var/run/nagios/nrpe.pid
+server_port=5666
+server_address=10.0.2.10
+nrpe_user=nagios
+nrpe_group=nagios
+allowed_hosts=10.0.2.30
+dont_blame_nrpe=0
+allow_bash_command_substitution=0
+debug=1
+command_timeout=60
+connection_timeout=300
+
+## System
+command[check_users]=/usr/lib/nagios/plugins/check_users -w 5 -c 10
+command[check_load]=/usr/lib/nagios/plugins/check_load -w 15,10,5 -c 30,25,20
+command[check_boot]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda1
+command[check_dev]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda2
+command[check_root]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/mapper/datanode1--vg-root
+command[check_db]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb1
+
+## RAM
+command[check_memory]=/usr/lib/nagios/plugins/check_linux_memory -f -w 20 -c 10 -d G
+
+## Prozesse
+command[check_zombie_procs]=/usr/lib/nagios/plugins/check_procs -w 5 -c 10 -s Z
+command[check_total_procs]=/usr/lib/nagios/plugins/check_procs -w 150 -c 200 
+
+## MySQL NDB Cluster
+command[check_ndbd]=/usr/lib/nagios/plugins/check_procs -w 4:4 -c 1:5 -C ndbd
+
+include=/etc/nagios/nrpe_local.cfg
+include_dir=/etc/nagios/nrpe.d/
+
