@@ -18,8 +18,6 @@ connection_timeout=300
 ## System
 command[check_users]=/usr/lib/nagios/plugins/check_users -w 5 -c 10
 command[check_load]=/usr/lib/nagios/plugins/check_load -w 15,10,5 -c 30,25,20
-command[check_boot]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda1
-command[check_dev]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda2
 command[check_root]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/mapper/datanode1--vg-root
 command[check_db]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sdb1
 
