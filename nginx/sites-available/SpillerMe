@@ -1,6 +1,6 @@
 ## /etc/nginx/sites-available/SpillerMe / 20150607
 ## Marianne Spiller <github@spiller.me>
-## nginx-1.4.6-1ubuntu3.2
+## nginx-1.8.0-1~trusty
 
 server {
 #------------------------------------------------------------------------
