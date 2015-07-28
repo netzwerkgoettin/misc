@@ -14,4 +14,4 @@ source ~/Google\ Drive/mutt/colors
 # SMTP setup
 #
 set smtp_url="smtp://USERNAME@MAILHOST:PORT/"
-set smtp_pass="MEIN_STENG_GEHEIMES_PASSWORT"
+set smtp_pass="MEIN_STRENG_GEHEIMES_PASSWORT"
