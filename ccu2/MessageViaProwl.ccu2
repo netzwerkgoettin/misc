@@ -1,9 +1,12 @@
-! MessageViaProwl.ccu2 / 20150310
+! MessageViaProwl.ccu2 / 20150920
 ! Marianne Spiller <github@spiller.me>
 ! Requires: CCU2
+! Zur korrekten Darstellung von Umlauten muss die zu sendende Nachricht entsprechend kodiert sein
+! Beispielsweise ueber folgendes Script: 
+! https://github.com/sysadmama/misc/blob/master/scripts/CCU2_Encode.sh
 !
 string stdout;
 string stderr;
 string text;
-text = " hier die zu sendende Nachricht!";
-system.Exec("wget -q -O /dev/null 'http://prowl.weks.net/publicapi/add?apikey=$APIKEY&application=OpenHAB&priority=1\&description=Absender" # text # "' ", &stdout, &stderr);
+text = "Die%20W%C3%A4sche%20ist%20fertig!";
+system.Exec("wget -q -O /dev/null 'http://prowl.weks.net/publicapi/add?apikey=$APIKEY&application=OpenHAB&priority=1\&description=meldet: " # text # "' ", &stdout, &stderr);
