@@ -1,0 +1,26 @@
+## FirstUser.ldif / 20151012
+## Marianne Spiller <github@spiller.me>
+
+# Entry 1: uid=firstuser,ou=People,dc=sysadmama,dc=de
+dn: uid=firstuser,ou=People,dc=sysadmama,dc=de
+cn: First User
+gecos: First User
+gidnumber: 1000
+givenname: First
+homedirectory: /home/firstuser
+homephone: +49 11 8 33
+loginshell: /bin/bash
+mail: firstuser@example.org
+objectclass: inetOrgPerson
+objectclass: posixAccount
+objectclass: shadowAccount
+objectclass: top
+shadowinactive: 30
+shadowlastchange: 16715
+shadowmax: 90
+shadowmin: 7
+shadowwarning: 14
+sn: User
+uid: firstuser
+uidnumber: 1000
+userpassword: {SSHA}blablablablablablablablablabla
