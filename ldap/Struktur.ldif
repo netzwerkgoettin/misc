@@ -1,0 +1,38 @@
+## Struktur.ldif / 20151012
+## Marianne Spiller <github@spiller.me>
+## slapd-2.4.31-1+nmu2ubuntu8.2 // Ubuntu 14.04.3 LTS
+
+## Struktur.ldif
+dn: dc=sysadmama,dc=de
+objectclass: dcObject
+objectclass: organization
+o: /sys/adm/ama LDAP Server
+
+## Den Admin-User anlegen
+dn: cn=papaschlumpf,dc=sysadmama,dc=de
+objectclass: organizationalRole
+cn: papaschlumpf
+
+## Jetzt folgt der "People"-Ast, in dem die aktiven User eingehaengt werden
+dn: ou=People,dc=sysadmama,dc=de
+ou: People
+objectclass: top
+objectclass: organizationalUnit
+
+## Jetzt folgt der "Group"-Ast, in dem die aktiven Gruppen stecken werden
+dn: ou=Group,dc=sysadmama,dc=de
+ou: Group
+objectClass: top
+objectClass: organizationalUnit
+
+## Den Ast vorbereiten, in dem die inaktiven User gehalten werden
+dn: ou=InactivePeople,dc=sysadmama,dc=de
+ou: InactivePeople
+objectClass: top
+objectClass: organizationalUnit
+
+## Den Ast erstellen, in dem sich inaktive Gruppen befinden werden
+dn: ou=InactiveGroup,dc=sysadmama,dc=de
+ou: InactiveGroup
+objectClass: top
+objectClass: organizationalUnit
