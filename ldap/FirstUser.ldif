@@ -1,7 +1,7 @@
 ## FirstUser.ldif / 20151012
 ## Marianne Spiller <github@spiller.me>
 
-# Entry 1: uid=firstuser,ou=People,dc=sysadmama,dc=de
+# User: uid=firstuser,ou=People,dc=sysadmama,dc=de
 dn: uid=firstuser,ou=People,dc=sysadmama,dc=de
 cn: First User
 gecos: First User
@@ -24,3 +24,11 @@ sn: User
 uid: firstuser
 uidnumber: 1000
 userpassword: {SSHA}blablablablablablablablablabla
+
+# Gruppe: cn=firstuser,ou=Group,dc=sysadmama,dc=de
+dn: cn=firstuser,ou=Group,dc=sysadmama,dc=de
+cn: firstuser
+gidnumber: 1000
+memberuid: firstuser
+objectclass: posixGroup
+objectclass: top
