@@ -15,5 +15,6 @@ sendmailmtamapname: aliases
 dn: sendmailMTAMapName=virtuser,dc=sysadmama,dc=de
 objectclass: sendmailMTA
 objectclass: sendmailMTAMap
+objectclass: top
 sendmailmtacluster: spiller.me
 sendmailmtamapname: virtuser
