@@ -1,0 +1,19 @@
+## Sendmail.ldif / 20151014
+## Marianne Spiller <github@spiller.me>
+## slapd-2.4.31-1+nmu2ubuntu8.2 // Ubuntu 14.04.3 LTS
+##
+
+# Entry for sendmailMTAMapName=aliases
+dn: sendmailMTAMapName=aliases,dc=sysadmama,dc=de
+objectclass: sendmailMTA
+objectclass: sendmailMTAMap
+objectclass: top
+sendmailmtacluster: spiller.me
+sendmailmtamapname: aliases
+
+# Entry for sendmailMTAMapName=virtuser
+dn: sendmailMTAMapName=virtuser,dc=sysadmama,dc=de
+objectclass: sendmailMTA
+objectclass: sendmailMTAMap
+sendmailmtacluster: spiller.me
+sendmailmtamapname: virtuser

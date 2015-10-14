@@ -1,0 +1,33 @@
+## FirstAliases.ldif / 20151014
+## Marianne Spiller <github@spiller.me>
+## slapd-2.4.31-1+nmu2ubuntu8.2 // Ubuntu 14.04.3 LTS
+##
+# Alias for root
+dn: sendmailMTAKey=root,sendmailMTAMapName=aliases,dc=sysadmama,dc=de
+objectclass: sendmailMTA
+objectclass: sendmailMTAAlias
+objectclass: sendmailMTAAliasObject
+sendmailmtaaliasgrouping: aliases
+sendmailmtaaliasvalue: spillerm
+sendmailmtacluster: spiller.me
+sendmailmtakey: root
+
+# Alias for postmaster
+dn: sendmailMTAKey=postmaster,sendmailMTAMapName=aliases,dc=sysadmama,dc=de
+objectclass: sendmailMTA
+objectclass: sendmailMTAAlias
+objectclass: sendmailMTAAliasObject
+sendmailmtaaliasgrouping: aliases
+sendmailmtaaliasvalue: root
+sendmailmtacluster: spiller.me
+sendmailmtakey: postmaster
+
+# Alias for mailer-daemon 
+dn: sendmailMTAKey=mailer-daemon,sendmailMTAMapName=aliases,dc=sysadmama,dc=de
+objectclass: sendmailMTA
+objectclass: sendmailMTAAlias
+objectclass: sendmailMTAAliasObject
+sendmailmtaaliasgrouping: aliases
+sendmailmtaaliasvalue: postmaster
+sendmailmtacluster: spiller.me
+sendmailmtakey: mailer-daemon
