@@ -1,5 +1,6 @@
 ## FirstUser.ldif / 20151012
 ## Marianne Spiller <github@spiller.me>
+## slapd-2.4.31-1+nmu2ubuntu8.2 // Ubuntu 14.04.3 LTS
 
 # User: uid=firstuser,ou=People,dc=sysadmama,dc=de
 dn: uid=firstuser,ou=People,dc=sysadmama,dc=de
