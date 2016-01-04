@@ -1,6 +1,6 @@
-## /etc/nagvis/nagvis.ini.php / 20160104
-## Marianne Spiller <github@spiller.me>
-## nagvis-1.7.10 
+;; /etc/nagvis/nagvis.ini.php / 20160104
+;; Marianne Spiller <github@spiller.me>
+;; nagvis-1.7.10 
 
 ; <?php return 1; ?>
 [global]
