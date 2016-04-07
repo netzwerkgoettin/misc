@@ -1,0 +1,16 @@
+## /lib/systemd/system/php7-fpm.service / 20160407
+## Marianne Spiller <github@spiller.me>
+## php-7.0.5~trusty
+
+[Unit]
+Description=The PHP 7 FastCGI Process Manager
+After=network.target
+
+[Service]
+Type=simple
+PIDFile=/opt/local/var/run/php-fpm.pid
+ExecStart=/opt/local/sbin/php-fpm --nodaemonize --fpm-config /opt/local/etc/php-fpm.conf
+ExecReload=/bin/kill -USR2 $MAINPID
+
+[Install]
+WantedBy=multi-user.target
