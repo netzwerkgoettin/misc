@@ -3,7 +3,7 @@
 ## php-7.0.5~trusty
 
 [Unit]
-Description=The PHP 7 FastCGI Process Manager
+Description=PHP 7 FastCGI Process Manager (Ver. 7.0.5)
 After=network.target
 
 [Service]
