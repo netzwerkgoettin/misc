@@ -3,7 +3,7 @@
 ## Marianne Spiller <github@spiller.me>
 ## icinga2-2.4.10-1~ppa1~xenial1
 
-function Usage() {
+Usage() {
   echo "host-by-mail notification script for Icinga2 by spillerm <github@spiller.me> 2016/06/16"
   echo "Used by icinga2 director and command 'alarm-host'."
 }
