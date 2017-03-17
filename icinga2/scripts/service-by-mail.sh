@@ -1,48 +1,53 @@
 #!/bin/bash
 ## /etc/icinga2/scripts/service-by-mail.sh / 20160616
 ## Marianne M. Spiller <github@spiller.me>
-## Last updated 20170309
+## Last updated 20170316
 ## Tested 2.6.2-1~ppa1~xenial1 // https://www.unixe.de/icinga2-director-notifications/
 
-## Probably you'll have to change at least two of them to fit your needs
+PROG="`basename $0`"
 HOSTNAME="`hostname`"
-MAILFROM="Icinga 2 Monitoring <icinga@example.com>"
-MONITORING_URL="https://www.example.com/icingaweb2"
 
 function Usage() {
 cat << EOF
 
-service-by-mail notification script for Icinga 2 by spillerm <github@spiller.me>
-- Create a command (type: Notification Plugin Command) using this script as 'Command'
-  => Take care of the command arguments!
-- Then create notification templates using this command
-- And now create notification objects and assign them as you want to
-Have fun!
+Usage, Usage!
 
 EOF
+exit 1;
 }
 
-while getopts a:b:c:d:e:hl:o:r:s:t: opt
+while getopts a:b:c:d:e:f:hi:l:o:r:s:t:v: opt
 do
   case "$opt" in
     a) HOSTADDRESS=$OPTARG ;;
-    b) NAUTHOR=$OPTARG ;;
-    c) NCOMMENT=$OPTARG ;;
+    b) NOTIFICATIONAUTHORNAME=$OPTARG ;;
+    c) NOTIFICATIONCOMMENT=$OPTARG ;;
     d) DATE=$OPTARG ;;
     e) SERVICENAME=$OPTARG ;;
-    h) Usage
-       exit 1 ;;
-    l) HOSTDN=$OPTARG ;;
+    f) MAILFROM=$OPTARG ;;
+    h) Usage ;;
+    i) HAS_ICINGAWEB2=$OPTARG ;;
+    l) HOSTALIAS=$OPTARG ;;
     o) SERVICEOUTPUT=$OPTARG ;;
-    r) RECIPIENT=$OPTARG ;;
+    r) USEREMAIL=$OPTARG ;;
     s) SERVICESTATE=$OPTARG ;;
-    t) NTYPE=$OPTARG ;;
-    ?) echo "ERROR: invalid option" >&2
-       exit 1 ;;
+    t) NOTIFICATIONTYPE=$OPTARG ;;
+    v) VERBOSE=$OPTARG ;;
+   \?) echo "ERROR: Invalid option -$OPTARG" >&2
+       Usage ;;
+    :) echo "Missing option argument for -$OPTARG" >&2
+       Usage ;;
+    *) echo "Unimplemented option: -$OPTARG" >&2
+       Usage ;;
   esac
 done
 
 shift $((OPTIND - 1))
+
+## Default sender address
+if [ ! -n "$MAILFROM" ] ; then
+  MAILFROM="Icinga 2 Monitoring <icinga@$HOSTNAME>"
+fi
 
 NOTIFICATION_MESSAGE=`cat << EOF
 ***** Icinga 2 Service Monitoring on $HOSTNAME *****
@@ -51,53 +56,34 @@ NOTIFICATION_MESSAGE=`cat << EOF
 
 When?    $DATE
 Service? $SERVICENAME
-Host?    $HOSTDN ($HOSTADDRESS)
+Host?    $HOSTALIAS ($HOSTADDRESS)
 Info?    $SERVICEOUTPUT
-
-Comment by $NAUTHOR: $NCOMMENT
-
-Have a look:
-$MONITORING_URL/monitoring/service/show?host=$HOSTDN&service=$SERVICENAME
-
 EOF
 `
 
-SUBJECT="[$NTYPE] $SERVICENAME on $HOSTDN is $SERVICESTATE!"
+## Are there any comments? Put them into the message!
+if [ -n "$NOTIFICATIONCOMMENT" ] ; then
+  NOTIFICATION_MESSAGE="$NOTIFICATION_MESSAGE
+
+Comment by $NOTIFICATIONAUTHORNAME:
+  $NOTIFICATIONCOMMENT"
+fi
+
+## Are we using Icinga Web 2? Put the URL into the message!
+if [ -n "$HAS_ICINGAWEB2" ] ; then
+  NOTIFICATION_MESSAGE="$NOTIFICATION_MESSAGE
+
+Get live status:
+  $HAS_ICINGAWEB2/monitoring/service/show?host=$HOSTALIAS&service=$SERVICENAME"
+fi
+
+## Build the message's subject
+SUBJECT="[$NOTIFICATIONTYPE] $SERVICENAME on $HOSTALIAS is $SERVICESTATE!"
+
+## Are we verbose? Then put a message to syslog...
+if [ "$VERBOSE" == "true" ] ; then
+  logger "$PROG sends $SUBJECT => $USEREMAIL"
+fi
 
 /usr/bin/printf "%b" "$NOTIFICATION_MESSAGE" \
-| mail -a "From: $MAILFROM" -s "$SUBJECT" $RECIPIENT
-
-##--------------------------------------------------------------------
-## object NotificationCommand "Service Alarm" {
-##     import "plugin-notification-command"
-##     command = [ "/etc/icinga2/scripts/service-by-mail.sh" ]
-##     arguments += {
-##         "-a" = "$address$"
-##         "-b" = "$notification.author$"
-##         "-c" = "$notification.comment$"
-##         "-d" = "$icinga.short_date_time$"
-##         "-e" = "$service.name$"
-##         "-l" = "$host.name$"
-##         "-o" = "$service.output$"
-##         "-r" = "$user.email$"
-##         "-s" = "$service.state$"
-##         "-t" = "$notification.type$"
-##     }
-## }
-##
-## template Notification "Generic Service Alarm" {
-##   command = "Service Alarm"
-##   interval = 6h
-##   states = [ Critical, OK, Warning ]
-##   types = [ Acknowledgement, Custom, Problem, Recovery ]
-## }
-##
-## apply Notification "Notify my team about service" to Service {
-##   import "Generic Service Alarm"
-##   period = "always"
-##   user_groups = [ "the_people" ]
-##   interval = 24h
-## 
-##   assign where true
-##   ignore where "External Hosts" in host.templates
-## }
+| mail -a "From: $MAILFROM" -s "$SUBJECT" $USEREMAIL
