@@ -1,0 +1,1041 @@
+##---------------------------------------------------------------------
+## icinga2_example.ldif / 20170320
+## Marianne M. Spiller <github@spiller.me>
+## slapd-2.4.40
+##
+## I used this data to create an Icinga 2 showcase with Icinga Director
+## and automation (import rules, sync,...). So perhaps it is useful for
+## you (or me, later on), too ;) I'll leave it here for further usage.
+##
+## Something like
+## cat icinga2_example.ldif | ldapadd -D cn=manager,dc=example,dc=com -W
+## should do the trick.
+##---------------------------------------------------------------------
+
+dn: dc=example,dc=com
+objectClass: dcObject
+objectClass: organization
+dc: example
+o: Example.com LDAP Server with 26 alphabetically users and hosts
+
+dn: cn=manager,dc=example,dc=com
+objectClass: organizationalRole
+cn: manager
+
+dn: ou=People,dc=example,dc=com
+ou: People
+objectClass: top
+objectClass: organizationalUnit
+
+dn: ou=Groups,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: Groups
+
+dn: uid=anton,ou=People,dc=example,dc=com
+cn: Anton User
+gecos: Anton User
+givenName: Anton
+homeDirectory: /home/anton
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: anton@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: anton
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+gidNumber: 1001
+uidNumber: 1001
+l: LDAP User
+
+dn: uid=berta,ou=People,dc=example,dc=com
+cn: Berta User
+gecos: Berta User
+givenName: Berta
+homeDirectory: /home/berta
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: berta@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: berta
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+gidNumber: 1002
+uidNumber: 1002
+l: LDAP User
+
+dn: uid=caesar,ou=People,dc=example,dc=com
+cn:: Q8Okc2FyIFVzZXI=
+gecos: Caesar User
+givenName:: Q8Okc2Fy
+homeDirectory: /home/caesar
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: caesar@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: caesar
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+uidNumber: 1003
+gidNumber: 1003
+l: LDAP User
+
+dn: uid=dora,ou=People,dc=example,dc=com
+cn: Dora User
+gecos: Dora User
+gidNumber: 1004
+givenName: Dora
+homeDirectory: /home/dora
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: dora@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: dora
+uidNumber: 1004
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=emil,ou=People,dc=example,dc=com
+cn: Emil User
+gecos: Emil User
+gidNumber: 1005
+givenName: Emil
+homeDirectory: /home/emil
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: emil@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: emil
+uidNumber: 1005
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=friedrich,ou=People,dc=example,dc=com
+cn: Friedrich User
+gecos: Friedrich User
+gidNumber: 1006
+givenName: Friedrich
+homeDirectory: /home/friedrich
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: friedrich@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: friedrich
+uidNumber: 1006
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=gustav,ou=People,dc=example,dc=com
+cn: Gustav User
+gecos: Gustav User
+gidNumber: 1007
+givenName: Gustav
+homeDirectory: /home/gustav
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: gustav@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: gustav
+uidNumber: 1007
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=heinrich,ou=People,dc=example,dc=com
+cn: Heinrich User
+gecos: Heinrich User
+gidNumber: 1008
+givenName: Heinrich
+homeDirectory: /home/heinrich
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: heinrich@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: heinrich
+uidNumber: 1008
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=ida,ou=People,dc=example,dc=com
+cn: Ida User
+gecos: Ida User
+gidNumber: 1009
+givenName: Ida
+homeDirectory: /home/ida
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: ida@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: ida
+uidNumber: 1009
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=julius,ou=People,dc=example,dc=com
+cn: Julius User
+gecos: Julius User
+gidNumber: 1010
+givenName: Julius
+homeDirectory: /home/julius
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: julius@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: julius
+uidNumber: 1010
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=kaufmann,ou=People,dc=example,dc=com
+cn: Kaufmann User
+gecos: Kaufmann User
+uidNumber: 1011
+gidNumber: 1011
+givenName: Kaufmann
+homeDirectory: /home/kaufmann
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: kaufmann@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: kaufmann
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=ludwig,ou=People,dc=example,dc=com
+cn: Ludwig User
+gecos: Ludwig User
+uidNumber: 1012
+gidNumber: 1012
+givenName: Ludwig
+homeDirectory: /home/ludwig
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: ludwig@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: ludwig
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=martha,ou=People,dc=example,dc=com
+cn: Martha User
+gecos: Martha User
+uidNumber: 1013
+gidNumber: 1013
+givenName: Martha
+homeDirectory: /home/martha
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: martha@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: martha
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=nordpol,ou=People,dc=example,dc=com
+cn: Nordpol User
+gecos: Nordpol User
+uidNumber: 1014
+gidNumber: 1014
+givenName: Nordpol
+homeDirectory: /home/nordpol
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: nordpol@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: nordpol
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=otto,ou=People,dc=example,dc=com
+cn: Otto User
+gecos: Otto User
+uidNumber: 1015
+gidNumber: 1015
+givenName: Otto
+homeDirectory: /home/otto
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: otto@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: otto
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=paula,ou=People,dc=example,dc=com
+cn: Paula User
+gecos: Paula User
+uidNumber: 1016
+gidNumber: 1016
+givenName: Paula
+homeDirectory: /home/paula
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: paula@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: paula
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=quelle,ou=People,dc=example,dc=com
+cn: Quelle User
+gecos: Quelle User
+uidNumber: 1017
+gidNumber: 1017
+givenName: Quelle
+homeDirectory: /home/quelle
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: quelle@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: quelle
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=richard,ou=People,dc=example,dc=com
+cn: Richard User
+gecos: Richard User
+uidNumber: 1018
+gidNumber: 1018
+givenName: Richard
+homeDirectory: /home/richard
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: richard@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: richard
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=samuel,ou=People,dc=example,dc=com
+cn: Samuel User
+gecos: Samuel User
+uidNumber: 1019
+gidNumber: 1019
+givenName: Samuel
+homeDirectory: /home/samuel
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: samuel@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: samuel
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=theodor,ou=People,dc=example,dc=com
+cn: Theodor User
+gecos: Theodor User
+uidNumber: 1020
+gidNumber: 1020
+givenName: Theodor
+homeDirectory: /home/theodor
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: theodor@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: theodor
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=viktor,ou=People,dc=example,dc=com
+cn: Viktor User
+gecos: Viktor User
+uidNumber: 1022
+gidNumber: 1022
+givenName: Viktor
+homeDirectory: /home/viktor
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: viktor@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: viktor
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=wilhelm,ou=People,dc=example,dc=com
+cn: Wilhelm User
+gecos: Wilhelm User
+uidNumber: 1023
+gidNumber: 1023
+givenName: Wilhelm
+homeDirectory: /home/wilhelm
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: wilhelm@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: wilhelm
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=xanthippe,ou=People,dc=example,dc=com
+cn: Xanthippe User
+gecos: Xanthippe User
+uidNumber: 1024
+gidNumber: 1024
+givenName: Xanthippe
+homeDirectory: /home/xanthippe
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: xanthippe@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: xanthippe
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=ypsilon,ou=People,dc=example,dc=com
+cn: Ypsilon User
+gecos: Ypsilon User
+uidNumber: 1025
+gidNumber: 1025
+givenName: Ypsilon
+homeDirectory: /home/ypsilon
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: ypsilon@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: ypsilon
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: uid=zacharias,ou=People,dc=example,dc=com
+cn: Zacharias User
+gecos: Zacharias User
+uidNumber: 1026
+gidNumber: 1026
+givenName: Zacharias
+homeDirectory: /home/zacharias
+homePhone: +49 11 8 33
+loginShell: /bin/bash
+mail: zacharias@example.com
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+shadowInactive: 30
+shadowLastChange: 16715
+shadowMax: 90
+shadowMin: 7
+shadowWarning: 14
+sn: User
+uid: zacharias
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+l: LDAP User
+
+dn: ou=Hosts,dc=example,dc=com
+ou: Hosts
+objectClass: top
+objectClass: organizationalUnit
+
+dn: cn=alpha.example.com+ipHostNumber=192.168.4.1,ou=Hosts,dc=example,dc=com
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+ipHostNumber: 192.168.4.1
+cn: alpha.example.com
+serialNumber: N/A
+l: Rack 1
+o: Office
+macAddress: A7:93:54:E1:B8:88
+description: Bare Metal Host
+ou: KM-1
+
+dn: cn=bravo.example.com+ipHostNumber=192.168.4.2,ou=Hosts,dc=example,dc=com
+serialNumber: N/A
+ou: IT
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+ipHostNumber: 192.168.4.2
+cn: bravo.example.com
+macAddress: 37:E6:B6:DA:D8:96
+l: Rack 2
+description: Virtual Host
+
+dn: cn=charlie.example.com+ipHostNumber=192.168.4.3,ou=Hosts,dc=example,dc=c
+ om
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.3
+cn: charlie.example.com
+l: Rack 1
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 22:A6:03:C4:70:B0
+description: Virtual Host
+
+dn: cn=delta.example.com+ipHostNumber=192.168.4.4,ou=Hosts,dc=example,dc=com
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.4
+cn: delta.example.com
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: A2:23:B1:1E:A7:1E
+l: Rack 2
+description: Virtual Host
+
+dn: cn=echo.example.com+ipHostNumber=192.168.4.5,ou=Hosts,dc=example,dc=com
+serialNumber: N/A
+ipHostNumber: 192.168.4.5
+cn: echo.example.com
+l: Rack 1
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 42:92:B9:52:BA:79
+description: Virtual Host
+ou: KM-1
+
+dn: cn=foxtrott.example.com+ipHostNumber=192.168.4.6,ou=Hosts,dc=example,dc=
+ com
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.6
+cn: foxtrott.example.com
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: D3:0D:3F:81:24:98
+l: Rack 2
+description: Virtual Host
+
+dn: cn=golf.example.com+ipHostNumber=192.168.4.7,ou=Hosts,dc=example,dc=com
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.7
+cn: golf.example.com
+l: Rack 1
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 86:C0:30:6C:91:DE
+description: Bare Metal Host
+
+dn: cn=hotel.example.com+ipHostNumber=192.168.4.8,ou=Hosts,dc=example,dc=com
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.8
+cn: hotel.example.com
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 82:45:21:BF:B5:04
+l: Rack 2
+description: Virtual Host
+
+dn: cn=india.example.com+ipHostNumber=192.168.4.9,ou=Hosts,dc=example,dc=com
+serialNumber: N/A
+ipHostNumber: 192.168.4.9
+cn: india.example.com
+l: Rack 1
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 40:4A:42:AD:AE:4E
+description: Virtual Host
+ou: KM-1
+
+dn: cn=juliet.example.com+ipHostNumber=192.168.4.10,ou=Hosts,dc=example,dc=c
+ om
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.10
+cn: juliet.example.com
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 17:E7:22:37:F0:F5
+l: Rack 2
+description: Virtual Host
+
+dn: cn=kilo.example.com+ipHostNumber=192.168.4.11,ou=Hosts,dc=example,dc=com
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.11
+cn: kilo.example.com
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: F5:7C:03:CA:A3:54
+l: Rack 1
+description: Virtual Host
+
+dn: cn=lima.example.com+ipHostNumber=192.168.4.12,ou=Hosts,dc=example,dc=com
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.12
+cn: lima.example.com
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: A0:AA:07:57:68:D9
+l: Rack 2
+description: Bare Metal Host
+
+dn: cn=mike.example.com+ipHostNumber=192.168.4.13,ou=Hosts,dc=example,dc=com
+serialNumber: N/A
+ipHostNumber: 192.168.4.13
+cn: mike.example.com
+l: Rack 1
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 83:9E:C5:A7:61:4D
+description: Bare Metal Host
+ou: KM-1
+
+dn: cn=november.example.com+ipHostNumber=192.168.4.14,ou=Hosts,dc=example,dc
+ =com
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.14
+cn: november.example.com
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 00:9D:32:36:78:44
+l: Rack 2
+description: Bare Metal Host
+
+dn: cn=oscar.example.com+ipHostNumber=192.168.4.15,ou=Hosts,dc=example,dc=co
+ m
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.15
+cn: oscar.example.com
+l: Rack 1
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 19:5F:65:D8:5F:F1
+description: Virtual Host
+
+dn: cn=papa.example.com+ipHostNumber=192.168.4.16,ou=Hosts,dc=example,dc=com
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.16
+cn: papa.example.com
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: F5:D2:4F:06:A6:22
+l: Rack 2
+description: Virtual Host
+
+dn: cn=quebec.example.com+ipHostNumber=192.168.4.17,ou=Hosts,dc=example,dc=c
+ om
+serialNumber: N/A
+ipHostNumber: 192.168.4.17
+cn: quebec.example.com
+l: Rack 1
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 50:31:7E:DD:9F:DE
+description: Virtual Host
+ou: KM-1
+
+dn: cn=romeo.example.com+ipHostNumber=192.168.4.18,ou=Hosts,dc=example,dc=co
+ m
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.18
+cn: romeo.example.com
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 7A:AE:F6:52:58:D0
+l: Rack 2
+description: Virtual Host
+
+dn: cn=sierra.example.com+ipHostNumber=192.168.4.19,ou=Hosts,dc=example,dc=c
+ om
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.19
+cn: sierra.example.com
+l: Rack 1
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: F8:CE:A4:CA:69:FA
+description: Virtual Host
+
+dn: cn=tango.example.com+ipHostNumber=192.168.4.20,ou=Hosts,dc=example,dc=co
+ m
+serialNumber: N/A
+ou: IT
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+ipHostNumber: 192.168.4.20
+cn: tango.example.com
+macAddress: 6F:F3:9F:8D:F9:FE
+l: Rack 2
+description: Virtual Host
+
+dn: cn=uniform.example.com+ipHostNumber=192.168.4.21,ou=Hosts,dc=example,dc=
+ com
+serialNumber: N/A
+l: Rack 1
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+ipHostNumber: 192.168.4.21
+cn: uniform.example.com
+macAddress: 1E:61:78:84:2E:06
+description: Virtual Host
+ou: KM-1
+
+dn: cn=victor.example.com+ipHostNumber=192.168.4.22,ou=Hosts,dc=example,dc=c
+ om
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.22
+cn: victor.example.com
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 46:47:E5:E6:CB:F7
+l: Rack 2
+description: Virtual Host
+
+dn: cn=whiskey.example.com+ipHostNumber=192.168.4.23,ou=Hosts,dc=example,dc=
+ com
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.23
+cn: whiskey.example.com
+l: Rack 1
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 19:A4:9D:D9:AC:B2
+description: Virtual Host
+
+dn: cn=x-ray.example.com+ipHostNumber=192.168.4.24,ou=Hosts,dc=example,dc=co
+ m
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.24
+cn: x-ray.example.com
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 2B:73:41:16:6B:2D
+l: Rack 2
+description: Bare Metal Host
+
+dn: cn=yankee.example.com+ipHostNumber=192.168.4.25,ou=Hosts,dc=example,dc=c
+ om
+serialNumber: N/A
+ipHostNumber: 192.168.4.25
+cn: yankee.example.com
+l: Rack 1
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 4D:43:51:D6:5D:BD
+description: Virtual Host
+ou: KM-1
+
+dn: cn=zulu.example.com+ipHostNumber=192.168.4.26,ou=Hosts,dc=example,dc=com
+serialNumber: N/A
+ou: IT
+ipHostNumber: 192.168.4.26
+cn: zulu.example.com
+objectClass: top
+objectClass: device
+objectClass: ipHost
+objectClass: ieee802Device
+o: Office
+macAddress: 92:47:36:9A:31:13
+l: Rack 2
+description: Virtual Host
+
+dn: uid=ulrich,ou=People,dc=example,dc=com
+shadowWarning: 14
+homePhone: +49 11 8 33
+shadowMax: 90
+shadowInactive: 30
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+objectClass: top
+loginShell: /bin/bash
+userPassword:: e1NTSEF9YmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxhYmxh
+uid: ulrich
+shadowLastChange: 16715
+sn: User
+shadowMin: 7
+homeDirectory: /home/ulrich
+gecos: Ulrich User
+givenName: Ulrich
+mail: ulrich@example.com
+cn: Ulrich User
+uidNumber: 1021
+gidNumber: 1021
+l: LDAP User
+
