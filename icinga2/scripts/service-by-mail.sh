@@ -1,37 +1,63 @@
-#!/bin/bash
-## /etc/icinga2/scripts/service-by-mail.sh / 20160616
+#!/usr/bin/env bash
+## Created 20160616 / Last updated 20170405
 ## Marianne M. Spiller <github@spiller.me>
-## Last updated 20170316
-## Tested 2.6.2-1~ppa1~xenial1 // https://www.unixe.de/icinga2-director-notifications/
+## Tested 2.6.3-1~ppa1~xenial1 // https://www.unixe.de/icinga2-director-notifications/
 
 PROG="`basename $0`"
 HOSTNAME="`hostname`"
+MAILBIN="sendmail"
+
+if [ -z "`which $MAILBIN`" ] ; then
+  echo "$MAILBIN not in \$PATH. Consider installing it."
+  exit 1
+fi
 
 function Usage() {
 cat << EOF
 
-Usage, Usage!
+The following are mandatory:
+  -4 HOSTADDRESS (\$address$)
+  -6 HOSTADDRESS (\$address6$)
+  -d LONGDATETIME (\$icinga.long_date_time$)
+  -e SERVICENAME (\$service.name$)
+  -l HOSTALIAS (\$host.name$)
+  -n HOSTDISPLAYNAME (\$host.display_name$)
+  -o SERVICEOUTPUT (\$service.output$)
+  -r USEREMAIL (\$user.email$)
+  -s SERVICESTATE (\$service.state$)
+  -t NOTIFICATIONTYPE (\$notification.type$)
+  -u SERVICEDISPLAYNAME (\$service.display_name$) 
+
+And these are optional:
+  -b NOTIFICATIONAUTHORNAME (\$notification.author$)
+  -c NOTIFICATIONCOMMENT (\$notification.comment$)
+  -i ICINGAWEB2URL (\$icingaweb2url$, Default: unset)
+  -f MAILFROM (\$notification_mailfrom$, Default: "Icinga 2 Monitoring <icinga@$HOSTNAME>")
+  -v VERBOSE (\$notification_sendtosyslog$)
 
 EOF
 exit 1;
 }
 
-while getopts a:b:c:d:e:f:hi:l:o:r:s:t:v: opt
+while getopts 4:6:b:c:d:e:f:hi:l:n:o:r:s:t:u:v: opt
 do
   case "$opt" in
-    a) HOSTADDRESS=$OPTARG ;;
+    4) HOSTADDRESS=$OPTARG ;;
+    6) HOSTADDRESS6=$OPTARG ;;
     b) NOTIFICATIONAUTHORNAME=$OPTARG ;;
     c) NOTIFICATIONCOMMENT=$OPTARG ;;
-    d) DATE=$OPTARG ;;
+    d) LONGDATETIME=$OPTARG ;;
     e) SERVICENAME=$OPTARG ;;
     f) MAILFROM=$OPTARG ;;
     h) Usage ;;
-    i) HAS_ICINGAWEB2=$OPTARG ;;
+    i) ICINGAWEB2URL=$OPTARG ;;
     l) HOSTALIAS=$OPTARG ;;
+    n) HOSTDISPLAYNAME=$OPTARG ;;
     o) SERVICEOUTPUT=$OPTARG ;;
     r) USEREMAIL=$OPTARG ;;
     s) SERVICESTATE=$OPTARG ;;
     t) NOTIFICATIONTYPE=$OPTARG ;;
+    u) SERVICEDISPLAYNAME=$OPTARG ;;
     v) VERBOSE=$OPTARG ;;
    \?) echo "ERROR: Invalid option -$OPTARG" >&2
        Usage ;;
@@ -49,19 +75,35 @@ if [ ! -n "$MAILFROM" ] ; then
   MAILFROM="Icinga 2 Monitoring <icinga@$HOSTNAME>"
 fi
 
+## Build the message's subject
+SUBJECT="[$NOTIFICATIONTYPE] $SERVICEDISPLAYNAME on $HOSTDISPLAYNAME is $SERVICESTATE!"
+
+## Build the notification message
 NOTIFICATION_MESSAGE=`cat << EOF
+Content-Type: text/plain
+Subject: $SUBJECT
+To: $USEREMAIL
+From: $MAILFROM
 ***** Icinga 2 Service Monitoring on $HOSTNAME *****
 
-==> $SERVICENAME is $SERVICESTATE! <==
+==> $SERVICEDISPLAYNAME on $HOSTDISPLAYNAME is $SERVICESTATE! <==
 
-When?    $DATE
-Service? $SERVICENAME
-Host?    $HOSTALIAS ($HOSTADDRESS)
 Info?    $SERVICEOUTPUT
+
+When?    $LONGDATETIME
+Service? $SERVICENAME (aka "$SERVICEDISPLAYNAME")
+Host?    $HOSTALIAS (aka "$HOSTDISPLAYNAME")
+IPv4?	 $HOSTADDRESS
 EOF
 `
 
-## Are there any comments? Put them into the message!
+## Is this host IPv6 capable? Put its address into the message.
+if [ -n "$HOSTADDRESS6" ] ; then
+  NOTIFICATION_MESSAGE="$NOTIFICATION_MESSAGE
+IPv6?    $HOSTADDRESS6"
+fi
+
+## Are there any comments? Put them into the message.
 if [ -n "$NOTIFICATIONCOMMENT" ] ; then
   NOTIFICATION_MESSAGE="$NOTIFICATION_MESSAGE
 
@@ -69,21 +111,18 @@ Comment by $NOTIFICATIONAUTHORNAME:
   $NOTIFICATIONCOMMENT"
 fi
 
-## Are we using Icinga Web 2? Put the URL into the message!
-if [ -n "$HAS_ICINGAWEB2" ] ; then
+## Are we using Icinga Web 2? Put the URL into the message.
+if [ -n "$ICINGAWEB2URL" ] ; then
   NOTIFICATION_MESSAGE="$NOTIFICATION_MESSAGE
 
 Get live status:
-  $HAS_ICINGAWEB2/monitoring/service/show?host=$HOSTALIAS&service=$SERVICENAME"
+  $ICINGAWEB2URL/monitoring/service/show?host=$HOSTALIAS&service=$SERVICENAME"
 fi
 
-## Build the message's subject
-SUBJECT="[$NOTIFICATIONTYPE] $SERVICENAME on $HOSTALIAS is $SERVICESTATE!"
-
-## Are we verbose? Then put a message to syslog...
+## Are we verbose? Then put a message to syslog.
 if [ "$VERBOSE" == "true" ] ; then
   logger "$PROG sends $SUBJECT => $USEREMAIL"
 fi
 
-/usr/bin/printf "%b" "$NOTIFICATION_MESSAGE" \
-| mail -a "From: $MAILFROM" -s "$SUBJECT" $USEREMAIL
+## And finally: send the message using sendmail command.
+/usr/bin/printf "%b" "$NOTIFICATION_MESSAGE" | $MAILBIN -t
